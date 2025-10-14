@@ -1,9 +1,11 @@
 /*
-//실습 : 하트모양
-int rows[] = {-1,10,11,12,13,14,15,16,17};
-int cols[] = {-2,2,3,4,5,6,7,8,9};
+** 도트매트릭스 제어 실습 : 하트모양 출력 **
+*/
+int rows[] = {-1, 10, 11, 12, 13, 14, 15, 16, 17}; // 행에 해당하는 핀 번호
+int cols[] = {-2, 2, 3, 4, 5, 6, 7, 8, 9}; // 열에 해당하는 핀 번호  
 
 void setup() {
+  // 각 행과 열 핀을 출력 모드로 설정
   for(int i = 1; i < 9; i++){
     pinMode(rows[i], OUTPUT);
     pinMode(cols[i], OUTPUT);
@@ -12,15 +14,15 @@ void setup() {
 
 void loop() {
   clear();
-  digitalWrite(rows[2], HIGH);
+  digitalWrite(rows[2], HIGH); // 2번째 행 ON
   digitalWrite(cols[2], LOW);
   digitalWrite(cols[3], LOW);
   digitalWrite(cols[6], LOW);
   digitalWrite(cols[7], LOW);
   delay(2);
 
-  clear(); // 모든 행 지움
-  digitalWrite(rows[3], HIGH);
+  clear(); 
+  digitalWrite(rows[3], HIGH); // 3번째 행 ON
   digitalWrite(cols[1], LOW);
   digitalWrite(cols[4], LOW);
   digitalWrite(cols[5], LOW);
@@ -28,69 +30,73 @@ void loop() {
   delay(2);
 
   clear();
-  digitalWrite(rows[4], HIGH);
+  digitalWrite(rows[4], HIGH); // 4번째 행 ON
   digitalWrite(cols[1], LOW);
   digitalWrite(cols[8], LOW);
   delay(2);
   
   clear();
-  digitalWrite(rows[5], HIGH);
+  digitalWrite(rows[5], HIGH); // 5번째 행 ON
   digitalWrite(cols[1], LOW);
   digitalWrite(cols[8], LOW);
   delay(2);
 
   clear();
-  digitalWrite(rows[6], HIGH);
+  digitalWrite(rows[6], HIGH); // 6번째 행 ON
   digitalWrite(cols[2], LOW);
   digitalWrite(cols[7], LOW);
   delay(2);
 
   clear();
-  digitalWrite(rows[7], HIGH);
+  digitalWrite(rows[7], HIGH); // 7번째 행 ON
   digitalWrite(cols[3], LOW);
   digitalWrite(cols[6], LOW);
   delay(2);
 
   clear();
-  digitalWrite(rows[8], HIGH);
+  digitalWrite(rows[8], HIGH); // 8번째 행 ON
   digitalWrite(cols[4], LOW);
   digitalWrite(cols[5], LOW);
   delay(2);
 }
 
+// 모든 LED를 끄는 함수
 void clear(){
-  for(int i = 1; i < 9; i++){ // 행번호
-    for(int j = 1; j < 9; j++){ // 열번호
+  for(int i = 1; i < 9; i++){ 
+    for(int j = 1; j < 9; j++){ 
         digitalWrite(rows[i], LOW); 
         digitalWrite(cols[j], HIGH);
     }
   }
 }
-*/
+
 
 /*
-** 중간 프로젝트의 미니 프로젝트 1 : 공이 위 아래로 왕복하는 화면 구현 **
+** 중간 프로젝트의 미니 프로젝트 1 : 공이 위 아래로만 왕복하는 화면 구현 **
 */
 
 int rows[] = {-1, 10, 11, 12, 13, 14, 15, 16, 17}; // 행에 해당하는 핀 번호
 int cols[] = {-2, 2, 3, 4, 5, 6, 7, 8, 9}; // 열에 해당하는 핀 번호       
 
-// 공의 위치 및 이동 방향 변수
+// 공의 위치 및 이동 방향
 int ballRow = 1;      // 공의 현재 행 위치 (1 ~ 8 사이) 
 int direction = 1;    // 공의 이동 방향 (1 : 아래로, -1 : 위로)
 const int delayTime = 50; // 공의 이동 속도 조절용 딜레이 시간
 
 void setup() {
+  // 각 행과 열 핀을 출력 모드로 설정
   for(int i = 1; i < 9; i++){
     pinMode(rows[i], OUTPUT);
     pinMode(cols[i], OUTPUT);
   }
+  clear(); // 모든 LED 초기화
 }
 
 void loop() {
-  drawBall(ballRow, 2, 100); // 공을 2열에 고정, 100ms 동안 표시
+  // 현재 위치에 공을 그림
+  drawBall(ballRow, 2, 100);
 
-  // 공의 행 위치를 방향에 따라 업데이트
+  // 공의 위치를 방향에 따라 업데이트
   ballRow += direction; 
 
   // 공이 위 또는 아래 끝에 도달했을 때 방향 반전
@@ -107,7 +113,7 @@ void loop() {
   delay(delayTime);
 }
 
-// 모든 LED를 끄는 함수 (잔상 제거용)
+// 모든 LED를 끄는 함수
 void clear(){
   for(int i = 1; i < 9; i++){
     for(int j = 1; j < 9; j++){
