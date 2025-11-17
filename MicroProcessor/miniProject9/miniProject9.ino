@@ -33,8 +33,6 @@ void loop() {
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x27,16,2);
-String a;
-char b;
 
 void setup() {
   lcd.begin();        // I2C LCD 초기화
@@ -45,9 +43,10 @@ void setup() {
 
 void loop() {
   if (Serial.available()) {
+    String a = "";
     lcd.clear();
     while (Serial.available()) {
-      b = char(Serial.read());
+      char b = char(Serial.read());
       if (b == '\n') break;   // 줄바꿈에서 입력 종료
       else a += b;
     }
@@ -61,8 +60,6 @@ void loop() {
       Serial.println("plz 16char below");
       lcd.print("plz 16char below");
     }
-
-    a = ""; // 버퍼 초기화
   }
 }
 */
